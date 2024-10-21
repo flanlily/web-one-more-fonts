@@ -38,12 +38,28 @@
             border: 1px solid #ccc; /* 境界線を追加 */
             border-radius: 4px; /* 角を丸くする */
         }
+        .spoiler {
+            color: #fff; /* スポイラーのテキスト色を白に */
+            background-color: #000; /* スポイラーの背景色を黒に */
+            cursor: pointer; /* カーソルをポインタに */
+            padding: 5px; /* パディングを追加 */
+            border-radius: 4px; /* 角を丸くする */
+            display: inline-block; /* インラインブロックにする */
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Barlow&family=Bebas+Neue&family=Crimson+Pro&family=Dancing+Script&family=Days+One&family=Exo+2&family=Fontdiner+Swanky&family=Gloria+Hallelujah&family=Lato&family=Montserrat&family=Nunito&family=Open+Sans&family=Poppins&family=Press+Start+2P&family=Roboto&family=Raleway&family=Source+Sans+Pro&family=Ubuntu&family=Varela+Round&family=Zilla+Slab&family=Noto+Serif+SC&display=swap" rel="stylesheet"> <!-- Noto Serif SCを追加 -->
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Barlow&family=Bebas+Neue&family=Crimson+Pro&family=Dancing+Script&family=Days+One&family=Exo+2&family=Fontdiner+Swanky&family=Gloria+Hallelujah&family=Lato&family=Montserrat&family=Nunito&family=Open+Sans&family=Poppins&family=Press+Start+2P&family=Roboto&family=Raleway&family=Source+Sans+Pro&family=Ubuntu&family=Varela+Round&family=Zilla+Slab&family=Noto+Serif+SC&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>リアルタイムフォント変換</h1>
     <h4 id="promptText">フォントを選択して文章を入力してください</h4>
+    <h5>コマンド:</h5>
+    <ul>
+        <li>/B - 太文字</li>
+        <li>/I - 斜体</li>
+        <li>/N - 取り消し線</li>
+        <li>/U - 下線</li>
+        <li>/S - スポイラー</li>
+    </ul>
 
     <!-- コマンド選択用のドロップダウン -->
     <select id="fontSelector" class="textbox">
@@ -69,7 +85,7 @@
         <option value="#u">Ubuntu</option>
         <option value="#vr">Varela Round</option>
         <option value="#zl">Zilla Slab</option>
-        <option value="#ns">Noto Serif</option> <!-- Noto Serifのオプションを追加 -->
+        <option value="#ns">Noto Serif</option>
     </select>
 
     <!-- テキスト入力用ボックス -->
@@ -83,7 +99,35 @@
         const outputText = document.getElementById('outputText');
 
         function updateOutput() {
-            outputText.textContent = inputText.value;
+            const text = inputText.value;
+
+            // デフォルトのスタイルをリセット
+            outputText.style.fontWeight = 'normal';
+            outputText.style.fontStyle = 'normal';
+            outputText.style.textDecoration = 'none';
+
+            // スポイラーのクラスを削除
+            outputText.classList.remove('spoiler');
+
+            // コマンドによるスタイル変更
+            if (text.includes('/B')) {
+                outputText.style.fontWeight = 'bold';
+            }
+            if (text.includes('/I')) {
+                outputText.style.fontStyle = 'italic';
+            }
+            if (text.includes('/N')) {
+                outputText.style.textDecoration = 'line-through';
+            }
+            if (text.includes('/U')) {
+                outputText.style.textDecoration += ' underline';
+            }
+            if (text.includes('/S')) {
+                outputText.classList.add('spoiler');
+                outputText.textContent = 'Spoiler: ' + text.replace(/\/S/g, ''); // スポイラー表示
+            } else {
+                outputText.textContent = text; // 通常のテキスト表示
+            }
         }
 
         fontSelector.addEventListener('change', function() {
@@ -162,10 +206,4 @@
                     break;
             }
 
-            updateOutput(); // フォント変更後にテキストを更新
-        });
-
-        inputText.addEventListener('input', updateOutput); // テキスト入力時に表示を更新
-    </script>
-</body>
-</html>
+            updateOutput(); // フォント変更後に
