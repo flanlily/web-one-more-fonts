@@ -39,13 +39,7 @@
             border-radius: 4px; /* 角を丸くする */
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Barlow&family=Bebas+Neue&family=Crimson+Pro&family=Dancing+Script&family=Days+One&family=Exo+2&family=Fontdiner+Swanky&family=Gloria+Hallelujah&family=Lato&family=Montserrat&family=Nunito&family=Open+Sans&family=Poppins&family=Press+Start+2P&family=Roboto&family=Raleway&family=Source+Sans+Pro&family=Ubuntu&family=Varela+Round&family=Zilla+Slab&display=swap" rel="stylesheet">
-    <style>
-        @font-face {
-            font-family: 'KaiTi';
-            src: local('KaiTi');
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Barlow&family=Bebas+Neue&family=Crimson+Pro&family=Dancing+Script&family=Days+One&family=Exo+2&family=Fontdiner+Swanky&family=Gloria+Hallelujah&family=Lato&family=Montserrat&family=Nunito&family=Open+Sans&family=Poppins&family=Press+Start+2P&family=Roboto&family=Raleway&family=Source+Sans+Pro&family=Ubuntu&family=Varela+Round&family=Zilla+Slab&family=Noto+Serif+SC&display=swap" rel="stylesheet"> <!-- Noto Serif SCを追加 -->
 </head>
 <body>
     <h1>リアルタイムフォント変換</h1>
@@ -75,7 +69,7 @@
         <option value="#u">Ubuntu</option>
         <option value="#vr">Varela Round</option>
         <option value="#zl">Zilla Slab</option>
-        <option value="#k">KaiTi</option> <!-- KaiTiを追加 -->
+        <option value="#ns">Noto Serif</option> <!-- Noto Serifのオプションを追加 -->
     </select>
 
     <!-- テキスト入力用ボックス -->
@@ -160,8 +154,8 @@
                 case '#zl':
                     outputText.style.fontFamily = '"Zilla Slab", serif';
                     break;
-                case '#k':
-                    outputText.style.fontFamily = '"KaiTi", serif'; // KaiTiフォントを指定
+                case '#ns': // Noto Serifの選択肢
+                    outputText.style.fontFamily = '"Noto Serif SC", serif';
                     break;
                 default:
                     outputText.style.fontFamily = 'Arial, sans-serif'; // デフォルトフォント
