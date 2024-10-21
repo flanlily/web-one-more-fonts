@@ -81,6 +81,10 @@
         const inputText = document.getElementById('inputText');
         const outputText = document.getElementById('outputText');
 
+        function updateOutput() {
+            outputText.textContent = inputText.value;
+        }
+
         fontSelector.addEventListener('change', function() {
             const selectedFont = fontSelector.value;
 
@@ -154,13 +158,10 @@
                     break;
             }
 
-            // 結果のテキストを設定
-            outputText.textContent = inputText.value;
+            updateOutput(); // フォント変更後にテキストを更新
         });
 
-        inputText.addEventListener('input', function() {
-            outputText.textContent = inputText.value;
-        });
+        inputText.addEventListener('input', updateOutput); // テキスト入力時に表示を更新
     </script>
 </body>
 </html>
